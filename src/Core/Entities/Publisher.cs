@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Core.Entities
 {
@@ -7,6 +7,6 @@ namespace Core.Entities
         public string Name { get; set; }
         public string Website { get; set; }
 
-        public IQueryable<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

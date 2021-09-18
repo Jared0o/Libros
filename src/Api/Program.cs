@@ -35,6 +35,7 @@ namespace Api
                     await context.Database.MigrateAsync();
 
                     await SeedUsersAndRoles.SeedUsersAndRolesAsync(userManager, roleManager);
+                    await SeedDate.Seed(userManager, context);
                 }
                 catch(Exception e)
                 {

@@ -2,7 +2,7 @@
 
 namespace Core.Interfaces
 {
-    interface IAuthorRepository : IBaseInterfaceRepository<Author>
+    public interface IAuthorRepository : IBaseInterfaceRepository<Author>
     {
     }
 }
