@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Core.Dtos.User;
+using Core.Entities.Enums;
 using Core.Entities.Identity;
 using Core.Interfaces.Services;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading.Tasks;
@@ -13,24 +15,38 @@ namespace Infrastructure.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ITokenService _tokenService;
-        private readonly IMapper _mapper;
+        private readonly RoleManager<Role> _roleManager;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, IMapper mapper)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
-            _mapper = mapper;
+            _roleManager = roleManager;
         }
 
-        public Task<UserResponseDto> GetCurrentUser()
+        public async Task<UserResponseDto> GetCurrentUser(string email)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return new UserResponseDto { Email = user.Email, Token = await _tokenService.CreateToken(user) };
         }
 
-        public Task<UserResponseDto> Register(UserRegisterRequest request)
+        public async Task<UserResponseDto> Register(UserRegisterRequest request)
         {
-            throw new System.NotImplementedException();
+            var user = new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email };
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            if (!result.Succeeded)
+                throw new RegisterException("We have got with register, please try again");
+
+            var resultRole = await _userManager.AddToRoleAsync(user, RolesEnum.Member.ToString());
+
+            if(!resultRole.Succeeded)
+                throw new RegisterException("We have got with register, please try again");
+
+            return new UserResponseDto { Email = user.Email, Token = await _tokenService.CreateToken(user) };
         }
 
         public async Task<UserResponseDto> SignIn(UserLoginRequest request)

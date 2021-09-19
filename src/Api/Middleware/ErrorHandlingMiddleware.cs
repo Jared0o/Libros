@@ -26,6 +26,16 @@ namespace Api.Middleware
             {
                 await next.Invoke(context);
             }
+            catch(IsReturnedException e)
+            {
+                var statusCode = 404;
+
+                context.Response.StatusCode = statusCode;
+
+                var response = JsonSerializer.Serialize(new ErrorResponse(statusCode, e.Message), _jsonoption);
+
+                await context.Response.WriteAsync(response);
+            }
             catch(ValidationException e)
             {
 

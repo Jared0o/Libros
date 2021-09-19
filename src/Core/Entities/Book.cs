@@ -1,4 +1,6 @@
-﻿namespace Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Core.Entities
 {
     public class Book : BaseEntity
     {
@@ -8,5 +10,8 @@
         public string Isbn { get; set; }
         public Author Author { get; set; }
         public Publisher Publisher { get; set; }
+        public bool IsActive { get; set; }
+
+        public ICollection<BorrowList> BorrowedList { get; set; }
     }
 }

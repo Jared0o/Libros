@@ -17,6 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BorrowList> BorrowList { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,6 +33,18 @@ namespace Infrastructure.Data
                 .HasMany(ur => ur.UserRoles)
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
+
+            builder.Entity<Book>()
+                .HasMany(b => b.BorrowedList)
+                .WithOne(l => l.Book)
+                .HasForeignKey(b => b.BookId)
+                .IsRequired();
+
+            builder.Entity<User>()
+                .HasMany(u => u.BorrowedList)
+                .WithOne(l => l.User)
+                .HasForeignKey(u => u.UserId)
                 .IsRequired();
         }
     }

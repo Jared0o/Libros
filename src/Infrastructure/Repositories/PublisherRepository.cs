@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories
             var checkPublisher = await _context.Publishers.FirstOrDefaultAsync(p => p.Name.ToUpper() == request.Name.ToUpper());
 
             if (checkPublisher != null)
-                throw new ItemExistsException(($"Publisher with name: { checkPublisher.Name } exists in Database");
+                throw new ItemExistsException($"Publisher with name: { checkPublisher.Name } exists in Database");
 
             var response = await _context.Publishers.AddAsync(request);
 

@@ -50,6 +50,8 @@ namespace Infrastructure.Data.Seeds
             {
                 await context.Books.AddRangeAsync(books);
             }
+
+
             await context.SaveChangesAsync();
         }
     }

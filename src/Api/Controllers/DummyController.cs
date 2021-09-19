@@ -11,7 +11,7 @@ namespace Api.Controllers
     {
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult> Something()
+        public ActionResult Something()
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
 

@@ -25,6 +25,12 @@ namespace Infrastructure.Extensions
             service.AddScoped<IAccountService, AccountService>();
             service.AddScoped<IAuthorRepository, AuthorRepository>();
             service.AddScoped<IAuthorService, AuthorService>();
+            service.AddScoped<IPublisherRepository, PublisherRepository>();
+            service.AddScoped<IPublisherService, PublisherService>();
+            service.AddScoped<IBookRepository, BookRepository>();
+            service.AddScoped<IBookService, BookService>();
+            service.AddScoped<IBorrowRepository, BorrowRepository>();
+            service.AddScoped<IBorrowService, BorrowService>();
 
 
             service.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
