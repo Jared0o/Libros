@@ -1,4 +1,6 @@
-﻿namespace Core.Dtos.User
+﻿using System.Collections.Generic;
+
+namespace Core.Dtos.User
 {
     public class UserResponseDto
     {

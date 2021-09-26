@@ -1,10 +1,44 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link> || 
+    <router-link v-if="!loggedIn" to="/login">Login</router-link>
+    <router-link @click="handlerLogout" v-if="loggedIn" to="/">Logout</router-link>
   </div>
   <router-view/>
 </template>
+
+<script>
+
+export default {
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    getUser() {
+      return this.$store.state.auth.user;
+    }
+  },
+
+  created() {
+    const token = localStorage.getItem('token');
+    if(token){
+      this.$store.commit("auth/checkLogin", token);
+    }else{
+      this.$store.commit('auth/loginFailure');
+    }
+  },
+
+  methods: {
+    handlerLogout(){
+      this.$store.dispatch("auth/logout").then(
+        () => {this.$router.push('/login');}
+      );
+    },
+  }
+}
+
+</script>
+
 
 <style lang="scss">
 #app {
