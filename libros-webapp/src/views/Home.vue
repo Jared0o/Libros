@@ -1,5 +1,5 @@
 <template>
-<BookList/>
+<h1>To jest strona główna tutaj nic się nie dzieje</h1>
 </template>
 
 <script>

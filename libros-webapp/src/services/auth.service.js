@@ -22,6 +22,17 @@ class AuthService {
     logout(){
         localStorage.removeItem('token');
     }
+
+    register(user) {
+        return axios
+            .post(API + 'register', user)
+            .then(res => {
+                if(res.data.token){
+                    localStorage.setItem('token', JSON.stringify(res.data.token));
+                }
+                return res.data;
+            })
+    }
     
 }
 

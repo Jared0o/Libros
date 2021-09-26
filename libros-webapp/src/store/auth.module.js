@@ -28,6 +28,19 @@ const initialState = user
           AuthService.logout();
           commit("logoutSuccess");
         },
+
+        register({commit}, user){
+          return AuthService.register(user).then(
+            user => {
+              commit('loginSuccess', user);
+              return Promise.resolve(user);
+            },
+            error => {
+              commit('loginFailure');
+              return Promise.reject(error);
+            }
+          );
+        },
     },
     mutations: {
         loginSuccess(state, user) {

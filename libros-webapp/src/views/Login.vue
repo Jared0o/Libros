@@ -1,12 +1,9 @@
 <template>
-  <form @submit.prevent="handleLogin">
-    <input v-model="email" type="email" placeholder="email" />
-    <input v-model="password" type="password" placeholder="password" />
-    <button>Login</button>
+  <form class="form" @submit.prevent="handleLogin">
+    <input class="input" v-model="email" type="email" placeholder="email" />
+    <input class="input" v-model="password" type="password" placeholder="password" />
+    <button class="btn">Login</button>
   </form>
-
-  <p>email: {{ email }}</p>
-  <p>password: {{ password }}</p>
 </template>
 
 <script>
@@ -51,4 +48,20 @@ export default {
 </script>
 
 <style>
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .input {
+    margin: 5px;
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size: 16px;
+  }
 </style>
