@@ -1,18 +1,13 @@
 <template>
 <h1>Książki</h1>
 <ul>
-    <li v-for="book in books" :key="book.id">
-        <p>Id: {{book.id}}</p>
-        <p>Tytuł książki: {{book.author.firstName + " " +book.author.lastName}}</p>
-        <p>Autor: {{book.author.name}}</p>
-        <p>Isbn: {{book.isbn}}</p>
-        <p>Wydawnictwo: {{book.publisher.name}}</p>
-    </li>
+    <div v-for="book in books" :key="book.id">
+        <router-link :to="{path: '/book/'+ book.id} ">{{book.name}}</router-link>
+    </div>
 </ul>
 </template>
 
 <script>
-import axios from 'axios';
 import BookService from '@/services/book.service';
 
 export default {

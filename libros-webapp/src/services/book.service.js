@@ -9,6 +9,10 @@ class BookService {
             return res.data
         })
     }
+
+    getBook(id){
+        return axios.get(API+id, authHeader).then(res=> res.data)
+    }
 }
 
 export default new BookService();

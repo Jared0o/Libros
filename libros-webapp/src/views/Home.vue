@@ -1,5 +1,7 @@
 <template>
-<h1>To jest strona główna tutaj nic się nie dzieje</h1>
+<section>
+  <BookList v-if="loggedIn"/>
+</section>
 </template>
 
 <script>
@@ -9,7 +11,13 @@ import BookList from  '@/components/BookList.vue';
 export default {
   name: 'Home',
   components: {
-    BookList
+    BookList,
   },
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+}
 }
 </script>
