@@ -75,5 +75,21 @@ namespace Infrastructure.Repositories
 
             return borrowList;
         }
+
+        public async Task<int> GetActiveBorrowCount()
+        {
+            var borrowCounter = await _context.BorrowList
+                .CountAsync(x => x.IsReturned == false);
+
+            return borrowCounter;
+        }
+
+        public async Task<int> GetBorrowCount()
+        {
+            var borrowCounter = await _context.BorrowList
+                .CountAsync();
+
+            return borrowCounter;
+        }
     }
 }

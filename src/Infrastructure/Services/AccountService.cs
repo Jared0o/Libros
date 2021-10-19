@@ -35,7 +35,6 @@ namespace Infrastructure.Services
         public async Task<UserResponseDto> Register(UserRegisterRequest request)
         {
             var user = new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, UserName = request.Email };
-
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
