@@ -11,5 +11,6 @@ namespace Core.Interfaces.Services
         public Task<AuthorResponseDto> GetAuthorAsync(int id);
         public Task DeleteAuthorAsync(int id, string userEmail);
         public Task<AuthorResponseDto> UpdateAuthorAsync(UpdateAuthorRequest request, string userEmail);
+        public Task<IReadOnlyList<AuthorResponseDto>> GetAuthorsByName(string name);
     }
 }

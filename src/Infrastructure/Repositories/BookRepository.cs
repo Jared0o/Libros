@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
@@ -68,6 +69,16 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
 
             return bookFromDb;
+        }
+
+        public async Task<IReadOnlyList<Book>> FindBooksByName(string name)
+        {
+            var books = await _context.Books.Where(x => x.Name.Contains(name)).ToListAsync();
+
+            if(books == null)
+                throw new NotFoundException($"Not Found Books");
+
+            return books;
         }
 
         private async Task<Book> CheckInDatabase(int id)

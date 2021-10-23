@@ -1,0 +1,34 @@
+<div  class="flex items-center justify-center mt-12">
+    <div class="w-96 px-8 py-6 mt-4 text-left bg-white shadow-lg">
+        <h3 class="text-2xl font-bold text-center">Dodaj</h3>
+        <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col">
+                <div>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Imię</mat-label>
+                        <input formControlName="firstName" type="text" matInput placeholder="Henryk">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Nazwisko</mat-label>
+                        <input formControlName="lastName" type="text" matInput placeholder="Sienkiewicz">
+                    </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Data urodzenia</mat-label>
+                        <input formControlName="dateOfBirth" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Data śmierci</mat-label>
+                        <input formControlName="dateOfDeath" matInput [matDatepicker]="pickerr">
+                        <mat-datepicker-toggle matSuffix [for]="pickerr"></mat-datepicker-toggle>
+                        <mat-datepicker [dateClass]="dateClass2" #pickerr></mat-datepicker>
+                      </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button color="primary">Dodaj</button>
+        </form>
+    </div>
+</div>

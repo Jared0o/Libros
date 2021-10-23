@@ -30,4 +30,10 @@ export class AuthService {
       lastName
     }, httpOptions);
   }
+
+  checkUser(email: string): Observable<any> {
+    return this.http.post(AUTH_API + 'check-user', {
+      email
+    }, httpOptions);
+  }
 }

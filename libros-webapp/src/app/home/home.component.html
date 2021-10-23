@@ -3,9 +3,9 @@
     <h3 *ngIf="!isLogged" class="mb-2 text-xl mt-5">Zaloguj się jeśli chcesz korzystać z aplikacji</h3>
     <div class="flex items-center mt-10">
         <div class="mr-10 text-xl" >
-            <div>Liczba książek w bibliotece: {{homepageInformation.bookCounter}}</div>
-            <div>Liczba aktuanych wypożyczonych książek: {{homepageInformation.activeBorrows}}</div>
-            <div>Wszystkie wypożyczenia: {{homepageInformation.borrowsNumber}}</div>
+            <div>Liczba książek w bibliotece: {{homepageInformation?.bookCounter}}</div>
+            <div>Liczba aktuanych wypożyczonych książek: {{homepageInformation?.activeBorrows}}</div>
+            <div>Wszystkie wypożyczenia: {{homepageInformation?.borrowsNumber}}</div>
          </div>
          <img class="w-80 img-responsive ml-10" src="assets/images/homeBook.svg">
     </div>

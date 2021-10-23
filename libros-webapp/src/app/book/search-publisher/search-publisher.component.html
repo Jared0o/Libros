@@ -1,0 +1,37 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="justify-center search-form flex items-center">
+    <div class="flex flex-col">
+        <mat-form-field class="example-full-width mr-2" appearance="fill">
+            <mat-label>nazwa wydawcy</mat-label>
+            <input formControlName="publisherName" matInput type="email" placeholder="Harry Potter">
+            </mat-form-field>
+        <button mat-raised-button color="primary">Szukaj</button>
+    </div>
+</form>
+    
+  <div  class=" mt-10 justify-center min-h-screen bg-white w-full">
+    <div class="col-span-12">
+      <div class="overflow-auto lg:overflow-visible">
+    <div class="flex flex-col lg:justify-between border-b-2 border-fuchsia-900 pb-1">
+    <h2 class="text-2xl text-gray-500 font-bold text-center">Lista wydawców</h2>
+          
+    <table class="table text-gray-400 border-separate space-y- text-sm ">
+        <thead class="bg-blue-500 text-white ">
+          <tr>
+            <th class="p-3">Id</th>
+            <th class="p-3 text-left">Nazwa</th>
+            <th class="p-3 text-left">Strona</th>
+          </tr>
+        </thead>
+        <tbody>
+      
+          <tr (click)='onClick(publisher)' *ngFor="let publisher of publishers" class="bg-blue-200 lg:text-black">
+            <td class="p-3 font-medium capitalize">{{publisher.id}}</td>
+            <td class="p-3">{{publisher.name}}</td>
+            <td class="p-3">{{publisher.website}}</td>
+          </tr>      
+        </tbody>
+      </table>
+    </div>
+</div>
+</div>
+  </div>

@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     password: [''],
     firstName: [''],
     lastName: ['']
-  }); 
+  });  
 
   constructor(private router: Router, private fb: FormBuilder, private token: TokenStorageService, private auth: AuthService) { }
 

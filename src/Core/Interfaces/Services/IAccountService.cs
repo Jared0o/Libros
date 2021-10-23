@@ -8,5 +8,6 @@ namespace Core.Interfaces.Services
         public Task<UserResponseDto> Register(UserRegisterRequest request);
         public Task<UserResponseDto> SignIn(UserLoginRequest request);
         public Task<UserResponseDto> GetCurrentUser(string email);
+        public Task<bool> CheckUser(string email);
     }
 }

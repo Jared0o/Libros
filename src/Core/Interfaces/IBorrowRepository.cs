@@ -13,5 +13,8 @@ namespace Core.Interfaces
         public Task ReturnBorrow(int id, User updateBy);
         public Task<int> GetActiveBorrowCount();
         public Task<int> GetBorrowCount();
+        public Task<IReadOnlyList<BorrowList>> GetNotReturnedBorrows();
+        public Task<IReadOnlyList<BorrowList>> GetReturnedBorrows();
+        public Task<IReadOnlyList<BorrowList>> GetExpiredBorrows();
     }
 }

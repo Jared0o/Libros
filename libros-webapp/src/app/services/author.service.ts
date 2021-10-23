@@ -23,4 +23,11 @@ export class AuthorService {
   getAuthor(id: number): Observable<Author[]> {
     return this.http.get<Author[]>(API + id, httpOptions);
   }
+
+  createAuthor(author: Author): Observable<any> {
+    return this.http.post<any>(API, author, httpOptions);
+  }
+  getAuthorsByName(name: string): Observable<Author[]> {
+    return this.http.get<Author[]>(API + 'by-name/' + name , httpOptions);
+  }
 }

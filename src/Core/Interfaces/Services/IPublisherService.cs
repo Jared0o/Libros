@@ -11,5 +11,6 @@ namespace Core.Interfaces.Services
         public Task<PublisherResponseDto> GetPublisherAsync(int id);
         public Task DeleteAsync(int id, string userEmail);
         public Task<PublisherResponseDto> UpdateAsync(UpdatePublisherRequest request, string userEmail);
+        public Task<IReadOnlyList<PublisherResponseDto>> GetPublishersByName(string name);
     }
 }

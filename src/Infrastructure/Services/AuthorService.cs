@@ -89,5 +89,14 @@ namespace Infrastructure.Services
 
             return response;
         }
+
+        public async Task<IReadOnlyList<AuthorResponseDto>> GetAuthorsByName(string name)
+        {
+            var author = await _authorRepository.GetAuthorByName(name);
+
+            var response = _mapper.Map<IReadOnlyList<AuthorResponseDto>>(author);
+
+            return response;
+        }
     }
 }

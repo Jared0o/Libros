@@ -11,5 +11,6 @@ namespace Core.Interfaces.Services
         public Task<BookResponseDto> GetBookAsync(int id);
         public Task DeleteAsync(int id, string email);
         public Task<BookResponseDto> UpdateAsync(UpdateBookRequest request, string email);
+        public Task<List<BookResponseDto>> GetBooksByName(string email);
     }
 }

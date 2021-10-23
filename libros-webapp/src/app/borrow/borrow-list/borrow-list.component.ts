@@ -28,7 +28,7 @@ export class BorrowListComponent implements OnInit {
   }
 
   private takeBorrows(): void{
-    this.borrowService.getBorrows().subscribe(
+    this.borrowService.getBorrowsNotReturned().subscribe(
       data => {
         console.log(data);
         this.borrowList = data;

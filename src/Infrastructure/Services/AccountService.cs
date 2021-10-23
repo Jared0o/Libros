@@ -66,5 +66,15 @@ namespace Infrastructure.Services
             return new UserResponseDto { Email = user.Email, Token = await _tokenService.CreateToken(user) };
 
         }
+
+        public async Task<bool> CheckUser(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if(user == null) 
+                throw new Exception("nie znaleziono użytkownika");
+
+            return true;
+        }
     }
 }

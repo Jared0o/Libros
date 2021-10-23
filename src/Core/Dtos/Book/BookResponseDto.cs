@@ -11,7 +11,9 @@ namespace Core.Dtos.Book
         public int Pages { get; set; }
         public string Isbn { get; set; }
         public AuthorResponseDto Author { get; set; }
+        public int AuthorId { get; set; }
         public PublisherResponseDto Publisher { get; set; }
+        public int PublisherId { get; set; }
     }
 }
 

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Authorize(Policy = "MemberRoleRequire")]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthorController : ControllerBase
@@ -66,6 +65,14 @@ namespace Api.Controllers
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             var response = await _authorService.UpdateAuthorAsync(request, email);
+
+            return Ok(response);
+        }
+
+        [HttpGet("by-name/{name}")]
+        public async Task<ActionResult<AuthorResponseDto>> GetAuthorByName(string name)
+        {
+            var response = await _authorService.GetAuthorsByName(name);
 
             return Ok(response);
         }

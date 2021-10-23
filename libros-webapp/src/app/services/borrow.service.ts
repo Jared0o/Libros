@@ -22,4 +22,24 @@ export class BorrowService {
   setAsReturned(id:number):Observable<any>{
     return this.http.patch(API + id, httpOptions)
   }
+
+  addBorrow(user: string, book: number):Observable<Borrow>{
+    console.log(user, book)
+    return this.http.post<Borrow>(API, {
+      userEmail:user,
+      bookId: book
+    }, httpOptions);
+  }
+
+  getBorrowsNotReturned():Observable<Borrow[]>{
+    return this.http.get<Borrow[]>(API + 'not-returned', httpOptions); 
+  }
+
+  getBorrowsReturned():Observable<Borrow[]>{
+    return this.http.get<Borrow[]>(API + 'returned', httpOptions); 
+  }
+
+  getExpiredBorrows():Observable<Borrow[]>{
+    return this.http.get<Borrow[]>(API + 'expired', httpOptions); 
+  }
 }

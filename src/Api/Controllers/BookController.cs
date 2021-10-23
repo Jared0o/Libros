@@ -68,5 +68,12 @@ namespace Api.Controllers
             return Ok(book);
         }
 
+        [HttpGet("books-by-email/{name}")]
+        public async Task<ActionResult<List<BookResponseDto>>> BooksByName(string name)
+        {
+            var books = await _bookService.GetBooksByName(name);
+
+            return Ok(books);
+        }
     }
 }
