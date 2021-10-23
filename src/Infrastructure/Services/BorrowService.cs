@@ -33,6 +33,8 @@ namespace Infrastructure.Services
             //Validator
 
             var userCreated = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(request.UserEmail);
+            var book = await _bookRepository.GetItem(request.BookId);
 
             var borrow = _mapper.Map<BorrowList>(request);
 
@@ -41,14 +43,19 @@ namespace Infrastructure.Services
             borrow.BorrowDate = DateTime.Now;
             borrow.IsReturned = false;
 
+            
+            borrow.UserId = user.Id;
+            
+            borrow.BookId = book.Id;
+
             borrow = await _borrowRepository.Create(borrow);
 
-            var book = await _bookRepository.GetItem(borrow.BookId);
-            var user = await _userManager.FindByIdAsync(borrow.UserId);
-
-            borrow.User = user;
-            borrow.Book = book;
             
+
+            borrow.Book = book;
+            borrow.User = user;
+
+
 
             var response = _mapper.Map<BorrowResponseDto>(borrow);
 
@@ -78,6 +85,33 @@ namespace Infrastructure.Services
             var user = await _userManager.FindByEmailAsync(email);
 
             await _borrowRepository.ReturnBorrow(id, user);
+        }
+
+        public async Task<IReadOnlyList<BorrowResponseDto>> GetNotReturnedBorrows()
+        {
+            var borrows = await _borrowRepository.GetNotReturnedBorrows();
+
+            var response = _mapper.Map<IReadOnlyList<BorrowResponseDto>>(borrows);
+
+            return response;
+        }
+
+        public async Task<IReadOnlyList<BorrowResponseDto>> GetReturnedBorrows()
+        {
+            var borrows = await _borrowRepository.GetReturnedBorrows();
+
+            var response = _mapper.Map<IReadOnlyList<BorrowResponseDto>>(borrows);
+
+            return response;
+        }
+
+        public async Task<IReadOnlyList<BorrowResponseDto>> GetExpiredBorrows()
+        {
+            var borrows = await _borrowRepository.GetExpiredBorrows();
+
+            var response = _mapper.Map<IReadOnlyList<BorrowResponseDto>>(borrows);
+
+            return response;
         }
     }
 }

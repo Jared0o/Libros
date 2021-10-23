@@ -1,0 +1,44 @@
+<nav class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg bg-gray-900 text-white">
+  <div>
+     <a routerLink="/" href="#">Booklib</a>
+   </div>
+
+   <svg (click)="dropDownMenuOpenClose()"
+   xmlns="http://www.w3.org/2000/svg"
+   id="menu-button"
+   class="h-6 w-6 cursor-pointer md:hidden block"
+   fill="none"
+   viewBox="0 0 24 24"
+   stroke="currentColor">
+   <path
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="2"
+     d="M4 6h16M4 12h16M4 18h16"/>
+ </svg>
+
+ <div [ngClass]="{'hidden': !isOpen}" class="w-full md:flex md:items-center md:w-auto">
+   <ul class="pt-4 text-base text-white md:flex md:justify-between md:pt-0">
+     <li *ngIf="isLogged">
+       <a routerLink="wypozyczenia" routerLinkActive="text-purple-500" class="md:p-4 py-2 block hover:text-purple-400">Wypożyczenia</a>
+     </li>
+     <li *ngIf="isLogged">
+       <a routerLink="ksiazki" routerLinkActive="text-purple-500" class="md:p-4 py-2 block hover:text-purple-400" href="#">Książki</a>
+     </li>
+     <li *ngIf="isLogged">
+       <a routerLink="zarzadzanie" routerLinkActive="text-purple-500" class="md:p-4 py-2 block hover:text-purple-400 cursor-pointer">Zarządzanie</a>
+     </li>
+   </ul>
+ </div>
+  
+  <div [ngClass]="{'hidden': !isOpen}" class="w-full md:flex md:items-center md:w-auto">
+     <ul class="pt-4 text-base text-white md:flex md:justify-between md:pt-0">
+       <li *ngIf="!isLogged">
+         <a routerLink="logowanie" routerLinkActive="text-purple-500" class="md:p-4 py-2 block hover:text-purple-400">Logowanie</a>
+       </li>
+       <li *ngIf="isLogged">
+         <a (click)="logout()" routerLinkActive="text-purple-500" class="md:p-4 py-2 block hover:text-purple-400 cursor-pointer">Wyloguj</a>
+       </li>
+     </ul>
+   </div>
+</nav>

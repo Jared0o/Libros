@@ -1,0 +1,20 @@
+<div  class="flex items-center justify-center mt-12">
+    <div class="w-96 px-8 py-6 mt-4 text-left bg-white shadow-lg">
+        <h3 class="text-2xl font-bold text-center">Dodaj</h3>
+        <form [formGroup]="publisherForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col">
+                <div>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Nazwa</mat-label>
+                        <input formControlName="name" type="text" matInput placeholder="Znak">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Strona Internetowa</mat-label>
+                        <input formControlName="website" type="text" matInput placeholder="www.znak.pl">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button color="primary">Dodaj</button>
+        </form>
+    </div>
+</div>

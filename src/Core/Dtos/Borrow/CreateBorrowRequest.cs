@@ -2,7 +2,7 @@
 {
     public class CreateBorrowRequest
     {
-        public string UserId { get; set; }
+        public string UserEmail { get; set; }
         public int BookId { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace Core.Interfaces
 {
     public interface IBookRepository : IBaseInterfaceRepository<Book>
     {
-
+        public Task<IReadOnlyList<Book>> FindBooksByName(string name);
     }
 }

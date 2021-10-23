@@ -31,6 +31,7 @@ namespace Infrastructure.Extensions
             service.AddScoped<IBookService, BookService>();
             service.AddScoped<IBorrowRepository, BorrowRepository>();
             service.AddScoped<IBorrowService, BorrowService>();
+            service.AddScoped<ILibraryInformation, LibraryInformationService>();
 
 
             service.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

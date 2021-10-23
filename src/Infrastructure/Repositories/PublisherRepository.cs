@@ -81,6 +81,19 @@ namespace Infrastructure.Repositories
 
         }
 
+        public async Task<IReadOnlyList<Publisher>> GetPublishersByName(string name)
+        {
+            var publishers = await _context.Publishers
+                .Where(x => x.Name.Contains(name))
+                .ToListAsync();
+
+            if (publishers == null)
+                throw new NotFoundException($"Not Found Publishers");
+
+            return publishers;
+
+        }
+
         private async Task<Publisher> CheckInDatabase(int id)
         {
             var publisher = await _context.Publishers

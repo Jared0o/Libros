@@ -58,5 +58,28 @@ namespace Api.Controllers
             return NoContent();
         }
 
+        [HttpGet("not-returned")]
+        public async Task<ActionResult<IReadOnlyList<BorrowResponseDto>>> GetNotReturned()
+        {
+            var borrows = await _borrowService.GetNotReturnedBorrows();
+
+            return Ok(borrows);
+        }
+
+        [HttpGet("returned")]
+        public async Task<ActionResult<IReadOnlyList<BorrowResponseDto>>> GetReturned()
+        {
+            var borrows = await _borrowService.GetReturnedBorrows();
+
+            return Ok(borrows);
+        }
+
+        [HttpGet("expired")]
+        public async Task<ActionResult<IReadOnlyList<BorrowResponseDto>>> GetExpired()
+        {
+            var borrows = await _borrowService.GetExpiredBorrows();
+
+            return Ok(borrows);
+        }
     }
 }

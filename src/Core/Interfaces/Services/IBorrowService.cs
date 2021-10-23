@@ -10,5 +10,9 @@ namespace Core.Interfaces.Services
         public Task<BorrowResponseDto> GetBorrowAsync(int id);
         public Task<IReadOnlyList<BorrowResponseDto>> GetBorrowsAsync();
         public Task SetBorrowToReturnedAsync(int id, string email);
+        public Task<IReadOnlyList<BorrowResponseDto>> GetNotReturnedBorrows();
+        public Task<IReadOnlyList<BorrowResponseDto>> GetReturnedBorrows();
+        public Task<IReadOnlyList<BorrowResponseDto>> GetExpiredBorrows();
+
     }
 }

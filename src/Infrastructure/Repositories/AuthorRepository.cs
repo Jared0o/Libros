@@ -87,6 +87,18 @@ namespace Infrastructure.Repositories
 
         }
 
+        public async Task<IReadOnlyList<Author>> GetAuthorByName(string name)
+        {
+            var authors = await _context.Authors
+                .Where(x => x.NormalizedName.Contains(name.ToUpper()))
+                .ToListAsync();
+
+            if (authors == null)
+                throw new NotFoundException($"Not Found Authors");
+
+            return authors;
+        }
+
         private async Task<Author> CheckInDatabase(int id)
         {
             var author = await _context.Authors
@@ -97,5 +109,7 @@ namespace Infrastructure.Repositories
 
             return author;
         }
+
+
     }
 }

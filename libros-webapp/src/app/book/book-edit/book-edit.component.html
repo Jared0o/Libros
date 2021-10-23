@@ -1,0 +1,42 @@
+<div  class="flex items-center justify-center mt-12">
+    <div class="w-96 px-8 py-6 mt-4 text-left bg-white shadow-lg">
+        <h3 class="text-2xl font-bold text-center">Dodaj</h3>
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col">
+                <div>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Tytuł</mat-label>
+                        <input formControlName="name" type="text" matInput placeholder="Harry Potter">
+                      </mat-form-field>
+
+                      <mat-form-field (click)="openDialogAuthor()" class="example-full-width flex" appearance="fill">
+                        <mat-label>Autor</mat-label>
+                        <input readonly [ngClass]="{'valid': authorChecked }" formControlName="author" type="text" matInput placeholder="J.K Rowilng">
+                      </mat-form-field>
+
+                      <mat-form-field (click)="openDialogPublisher()" class="example-full-width flex" appearance="fill">
+                        <mat-label>Wydawnictwo</mat-label>
+                        <input readonly [ngClass]="{'valid': publisherChecked }" formControlName="publisher" type="text" matInput placeholder="Znak">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Rok</mat-label>
+                        <input formControlName="age" type="number" matInput placeholder="1924">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Ilość stron</mat-label>
+                        <input formControlName="pages" type="number" matInput placeholder="987">
+                      </mat-form-field>
+
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Isbn</mat-label>
+                        <input formControlName="isbn" type="text" matInput placeholder="987">
+                      </mat-form-field>
+
+                </div>
+            </div>
+            <button mat-raised-button color="primary">Dodaj</button>
+        </form>
+    </div>
+</div>

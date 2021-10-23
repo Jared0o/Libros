@@ -32,7 +32,7 @@ namespace Infrastructure.Services
             await validator.ValidateAndThrowAsync(request);            
 
             var user = await _userManager.FindByEmailAsync(userEmail);
-
+            await _userManager.SetLockoutEnabledAsync(user, false);
             var author = _mapper.Map<Author>(request);
 
             author.CreatedBy = user;
@@ -55,7 +55,7 @@ namespace Infrastructure.Services
 
         public async Task<AuthorResponseDto> GetAuthorAsync(int id)
         {
-            var author = await _authorRepository.GetItem(id);
+            var author = await _authorRepository.GetItem(id);             
 
             var response = _mapper.Map<AuthorResponseDto>(author);
 
@@ -86,6 +86,15 @@ namespace Infrastructure.Services
             author = await _authorRepository.Update(author);
 
             var response = _mapper.Map<AuthorResponseDto>(author);
+
+            return response;
+        }
+
+        public async Task<IReadOnlyList<AuthorResponseDto>> GetAuthorsByName(string name)
+        {
+            var author = await _authorRepository.GetAuthorByName(name);
+
+            var response = _mapper.Map<IReadOnlyList<AuthorResponseDto>>(author);
 
             return response;
         }

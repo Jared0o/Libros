@@ -96,5 +96,14 @@ namespace Infrastructure.Services
 
             return response;
         }
+
+        public async Task<List<BookResponseDto>> GetBooksByName(string email)
+        {
+            var books = await _bookRepository.FindBooksByName(email);
+
+            var response = _mapper.Map<List<BookResponseDto>>(books);
+
+            return response;
+        }
     }
 }

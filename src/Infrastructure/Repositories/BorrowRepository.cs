@@ -6,6 +6,7 @@ using Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
@@ -74,6 +75,64 @@ namespace Infrastructure.Repositories
                 throw new NotFoundException($"Not Found Borrow with Id {id}");
 
             return borrowList;
+        }
+
+        public async Task<int> GetActiveBorrowCount()
+        {
+            var borrowCounter = await _context.BorrowList
+                .CountAsync(x => x.IsReturned == false);
+
+            return borrowCounter;
+        }
+
+        public async Task<int> GetBorrowCount()
+        {
+            var borrowCounter = await _context.BorrowList
+                .CountAsync();
+
+            return borrowCounter;
+        }
+
+        public async Task<IReadOnlyList<BorrowList>> GetNotReturnedBorrows()
+        {
+            var borrows = await _context.BorrowList.Where(x => x.IsReturned == false)
+                .Include(b => b.Book).ThenInclude(b => b.Author)
+                .Include(b => b.Book).ThenInclude(b => b.Publisher)
+                .Include(b => b.User)
+                .ToListAsync();
+
+            if(borrows == null)
+                throw new NotFoundException($"Not Found Borrows");
+
+            return borrows;
+        }
+
+        public async Task<IReadOnlyList<BorrowList>> GetReturnedBorrows()
+        {
+            var borrows = await _context.BorrowList.Where(x => x.IsReturned == true)
+                .Include(b => b.Book).ThenInclude(b => b.Author)
+                .Include(b => b.Book).ThenInclude(b => b.Publisher)
+                .Include(b => b.User)
+                .ToListAsync();
+
+            if (borrows == null)
+                throw new NotFoundException($"Not Found Borrows");
+
+            return borrows;
+        }
+
+        public async Task<IReadOnlyList<BorrowList>> GetExpiredBorrows()
+        {
+            var borrows = await _context.BorrowList.Where(x => (x.BorrowDate.AddDays(7) < DateTime.Now) && x.IsReturned == false )
+                .Include(b => b.Book).ThenInclude(b => b.Author)
+                .Include(b => b.Book).ThenInclude(b => b.Publisher)
+                .Include(b => b.User)
+                .ToListAsync();
+
+            if (borrows == null)
+                throw new NotFoundException($"Not Found Borrows");
+
+            return borrows;
         }
     }
 }

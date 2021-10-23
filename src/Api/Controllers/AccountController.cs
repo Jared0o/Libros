@@ -17,6 +17,14 @@ namespace Api.Controllers
             _account = account;
         }
 
+        [HttpPost("check-user")]
+        public async Task<ActionResult> CheckUser(CheckUserRequestDto user)
+        {
+            var response = await _account.CheckUser(user.Email);
+
+            return Ok(response);
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult<UserResponseDto>> Login(UserLoginRequest request)
         {

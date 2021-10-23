@@ -35,7 +35,6 @@ namespace Infrastructure.Services
         public async Task<UserResponseDto> Register(UserRegisterRequest request)
         {
             var user = new User { FirstName = request.FirstName, LastName = request.LastName, Email = request.Email, UserName = request.Email };
-
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
@@ -66,6 +65,16 @@ namespace Infrastructure.Services
 
             return new UserResponseDto { Email = user.Email, Token = await _tokenService.CreateToken(user) };
 
+        }
+
+        public async Task<bool> CheckUser(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if(user == null) 
+                throw new Exception("nie znaleziono użytkownika");
+
+            return true;
         }
     }
 }

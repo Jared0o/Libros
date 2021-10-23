@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Authorize(Policy = "MemberRoleRequire")]
     [ApiController]
     [Route("api/[controller]")]
     public class PublisherController : ControllerBase
@@ -66,6 +65,14 @@ namespace Api.Controllers
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             var response = await _publisherService.UpdateAsync(request, email);
+
+            return Ok(response);
+        }
+
+        [HttpGet("by-name/{name}")]
+        public async Task<ActionResult<PublisherResponseDto>> GetPublisher(string name)
+        {
+            var response = await _publisherService.GetPublishersByName(name);
 
             return Ok(response);
         }
